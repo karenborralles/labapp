@@ -71,6 +71,16 @@ class _RegisterUsagePageState extends State<RegisterUsagePage> {
     return Scaffold(
       backgroundColor: const Color(0xFFE5E5E5),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              Navigator.of(context).maybePop();
+            }
+          },
+        ),
         title: const Text('Registrar Uso'),
         backgroundColor: const Color(0xFF219EBC),
       ),

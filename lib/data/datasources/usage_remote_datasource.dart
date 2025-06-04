@@ -17,16 +17,15 @@ class UsageRemoteDataSource {
       throw Exception('Error al cargar el historial de usos');
     }
   }
-  
+
   Future<void> addUsage(Usage usage) async {
     final response = await http.post(
-      Uri.parse(_baseUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'productId'   : usage.productId,
-        'quantityUsed': usage.quantityUsed,
-        'recipient'   : usage.recipient,
-        'usageDate'   : usage.usageDate.toIso8601String(),
+      Uri.parse(_baseUrl), // 👉 El POST es a http://IP:PORT/api/usages
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "productId": usage.productId,
+        "quantityUsed": usage.quantityUsed,
+        "recipient": usage.recipient,
       }),
     );
 

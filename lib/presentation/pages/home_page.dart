@@ -6,6 +6,7 @@ import '../../presentation/blocs/product/product_bloc.dart';
 import '../../presentation/blocs/product/product_state.dart';
 import '../../presentation/blocs/product/product_event.dart';
 import '../../widgets/product_card.dart';
+import '../../data/datasources/auth_local_datasource.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                   expiry: product.expiryDate != null
                       ? '${product.expiryDate!.day}/${product.expiryDate!.month}/${product.expiryDate!.year}'
                       : 'Sin caducidad',
-                  isNearExpiry: isNearExpiry, 
+                  isNearExpiry: isNearExpiry,
                 );
               },
             );
@@ -126,22 +127,36 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.assignment_outlined),
             title: const Text('Registrar Uso'),
-            onTap: () => context.go('/register-usage'),
+            onTap: () {
+              Navigator.pop(context); // Cerramos Drawer
+              context.push('/register-usage'); // Ir a Registrar Uso
+            },
           ),
           ListTile(
             leading: const Icon(Icons.history),
             title: const Text('Historial'),
-            onTap: () => context.go('/history'),
+            onTap: () {
+              Navigator.pop(context);
+              context.push('/history'); // Ir a Historial
+            },
           ),
           ListTile(
             leading: const Icon(Icons.warning),
             title: const Text('Alertas'),
-            onTap: () => context.go('/alerts'),
+            onTap: () {
+              Navigator.pop(context);
+              context.push('/alerts'); // Ir a Alertas
+            },
           ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Cerrar Sesión'),
-            onTap: () => context.go('/login'),
+            onTap: () async {
+              await AuthLocalDataSource().deleteToken(); // Borra el token guardado
+              Navigator.pop(context);
+              context.go('/login'); // Cerrar sesión y limpiar historial
+            },
           ),
         ],
       ),

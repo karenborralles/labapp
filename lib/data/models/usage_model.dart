@@ -23,6 +23,6 @@ class UsageModel extends Usage {
         quantityUsed: json['quantityUsed'],
         recipient   : json['recipient'],
         usageDate   : DateTime.parse(json['usageDate']),
-        productName : json['product_name'],  
+        productName : json['productName'],   // 👈 CAMBIA ESTO
       );
 }

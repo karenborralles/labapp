@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../presentation/blocs/alert/alert_bloc.dart';
 import '../../presentation/blocs/alert/alert_state.dart';
@@ -13,6 +14,16 @@ class AlertsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFE5E5E5),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              Navigator.of(context).maybePop();
+            }
+          },
+        ),
         title: const Text('Alertas de Caducidad'),
         backgroundColor: const Color(0xFF219EBC),
       ),

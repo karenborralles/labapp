@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../blocs/auth/auth_bloc.dart';
 import '../blocs/auth/auth_event.dart';
 import '../blocs/auth/auth_state.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
               SnackBar(content: Text('Bienvenido, ${state.name}!')),
             );
             // Aquí deberías redirigir a tu página principal
-            Navigator.pushReplacementNamed(context, '/home');
+            context.go('/home');
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/register');
+                      context.go('/register');
                     },
                     child: const Text(
                       '¿No tienes cuenta? Regístrate',
