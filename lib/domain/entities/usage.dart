@@ -3,7 +3,7 @@ class Usage {
   final int productId;
   final int quantityUsed;
   final String recipient;
-  final DateTime usageDate;      //  ← non-nullable
+  final DateTime usageDate;
   final String? productName;
 
   Usage({

@@ -28,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Bienvenido, ${state.name}!')),
             );
-            // Aquí deberías redirigir a tu página principal
             context.go('/home');
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(

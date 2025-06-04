@@ -97,7 +97,6 @@ class _AddProductPageState extends State<AddProductPage> {
           const SnackBar(content: Text('Producto guardado exitosamente')),
         );
 
-        // 🔥 Refrescar productos cuando regreses
         context.read<ProductBloc>().add(LoadProductsEvent());
 
         if (context.canPop()) {

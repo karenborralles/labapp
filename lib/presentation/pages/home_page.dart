@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _navigateToAddProduct(BuildContext context) async {
     await context.push('/add-product');
-    _loadProducts(); // Recarga productos al regresar
+    _loadProducts(); 
   }
 
   @override
@@ -45,13 +45,12 @@ class _HomePageState extends State<HomePage> {
           if (state is ProductLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProductLoaded) {
-            final products = List.of(state.products); // Copia segura
+            final products = List.of(state.products); 
 
             if (products.isEmpty) {
               return const Center(child: Text('No hay productos disponibles.'));
             }
 
-            // Ordenar productos: los que están más próximos a caducar primero
             products.sort((a, b) {
               if (a.expiryDate == null && b.expiryDate == null) return 0;
               if (a.expiryDate == null) return 1;
@@ -128,8 +127,8 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.assignment_outlined),
             title: const Text('Registrar Uso'),
             onTap: () {
-              Navigator.pop(context); // Cerramos Drawer
-              context.push('/register-usage'); // Ir a Registrar Uso
+              Navigator.pop(context); 
+              context.push('/register-usage');
             },
           ),
           ListTile(
@@ -137,7 +136,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Historial'),
             onTap: () {
               Navigator.pop(context);
-              context.push('/history'); // Ir a Historial
+              context.push('/history'); 
             },
           ),
           ListTile(
@@ -145,7 +144,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Alertas'),
             onTap: () {
               Navigator.pop(context);
-              context.push('/alerts'); // Ir a Alertas
+              context.push('/alerts'); 
             },
           ),
           const Divider(),
@@ -153,9 +152,9 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Cerrar Sesión'),
             onTap: () async {
-              await AuthLocalDataSource().deleteToken(); // Borra el token guardado
+              await AuthLocalDataSource().deleteToken(); 
               Navigator.pop(context);
-              context.go('/login'); // Cerrar sesión y limpiar historial
+              context.go('/login'); 
             },
           ),
         ],

@@ -12,7 +12,7 @@ class UsageRemoteDataSource {
 
     if (response.statusCode == 200) {
       final List<dynamic> body = jsonDecode(response.body);
-      return body.map((json) => UsageModel.fromJson(json)).toList();
+      return body.map((json) => UsageModel.fromJson(json).toEntity()).toList();
     } else {
       throw Exception('Error al cargar el historial de usos');
     }
@@ -20,7 +20,7 @@ class UsageRemoteDataSource {
 
   Future<void> addUsage(Usage usage) async {
     final response = await http.post(
-      Uri.parse(_baseUrl), // 👉 El POST es a http://IP:PORT/api/usages
+      Uri.parse(_baseUrl), 
       headers: {"Content-Type": "application/json"},
       body: json.encode({
         "productId": usage.productId,

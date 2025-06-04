@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart'; // <-- IMPORTANTE
+import 'package:go_router/go_router.dart'; 
 import '../../presentation/blocs/auth/auth_bloc.dart';
 import '../../presentation/blocs/auth/auth_event.dart';
-import '../../presentation/blocs/auth/auth_state.dart'; // <-- IMPORTANTE para detectar AuthSuccess y AuthFailure
+import '../../presentation/blocs/auth/auth_state.dart'; 
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -25,11 +25,10 @@ class _RegisterPageState extends State<RegisterPage> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            // 🧠 Usuario creado exitosamente
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Usuario registrado exitosamente')),
             );
-            context.go('/login'); // <-- 🚀 Regresa al Login
+            context.go('/login'); 
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),

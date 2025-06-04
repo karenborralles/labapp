@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'auth_local_datasource.dart';   // <--- Importa esto
+import 'auth_local_datasource.dart';   
 
 class AuthRemoteDataSource {
   final String baseUrl = "http://192.168.1.79:3000/api/auth"; 
-  final AuthLocalDataSource _localDataSource = AuthLocalDataSource(); // <--- Instancia
+  final AuthLocalDataSource _localDataSource = AuthLocalDataSource(); 
 
   Future<String?> login(String email, String password) async {
     final response = await http.post(
