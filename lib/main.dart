@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:labapp/domain/usecases/update_product_quantity.dart';
 import 'package:labapp/presentation/pages/add_product_page.dart';
 import 'package:labapp/presentation/pages/alerts_page.dart';
 import 'package:labapp/presentation/pages/history_page.dart';
@@ -46,19 +47,21 @@ class LabApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final alertBloc = AlertBloc(
+      GetAlerts(AlertRepositoryImpl(AlertRemoteDataSource())),
+    );
+    
     final productBloc = ProductBloc(
       getProducts: GetProducts(ProductRepositoryImpl(ProductRemoteDataSource())),
       addProduct: AddProduct(ProductRepositoryImpl(ProductRemoteDataSource())),
       deleteProduct: DeleteProduct(ProductRepositoryImpl(ProductRemoteDataSource())),
+      updateProductQuantity: UpdateProductQuantity(ProductRepositoryImpl(ProductRemoteDataSource())), 
+      alertBloc: alertBloc, 
     );
 
     final usageBloc = UsageBloc(
       AddUsage(UsageRepositoryImpl(UsageRemoteDataSource())),
       UsageRepositoryImpl(UsageRemoteDataSource()),
-    );
-
-    final alertBloc = AlertBloc(
-      GetAlerts(AlertRepositoryImpl(AlertRemoteDataSource())),
     );
 
     final authRepository = AuthRepositoryImpl(AuthRemoteDataSource());

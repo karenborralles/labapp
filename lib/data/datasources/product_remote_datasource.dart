@@ -21,7 +21,7 @@ class ProductRemoteDataSource {
       headers: {'Content-Type': 'application/json'},
       body: json.encode(product.toJson()),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Error al agregar producto');
     }
   }
@@ -30,6 +30,17 @@ class ProductRemoteDataSource {
     final response = await http.delete(Uri.parse('$baseUrl/$id'));
     if (response.statusCode != 200 && response.statusCode != 204) {
       throw Exception('Error al eliminar producto');
+    }
+  }
+
+  Future<void> updateProductQuantity(int id, int newQuantity) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/$id'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'quantity': newQuantity}),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Error al actualizar producto');
     }
   }
 }

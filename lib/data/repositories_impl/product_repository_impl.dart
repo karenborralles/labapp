@@ -14,7 +14,11 @@ class ProductRepositoryImpl {
     await remoteDataSource.deleteProduct(id);
   }
 
-  Future<void> addProduct(Product product) async {      
+  Future<void> addProduct(Product product) async {
     await remoteDataSource.addProduct(product);
+  }
+
+  Future<void> updateProductQuantity(int id, int newQuantity) async {
+    await remoteDataSource.updateProductQuantity(id, newQuantity);
   }
 }
